@@ -3,7 +3,7 @@ import { useState } from "react"
 import NavListDrawer from "./NavListDrawer"
 import MenuIcon from '@mui/icons-material/Menu';
 import { Box } from "@mui/system";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export default function Navbar( { navArrayLinks } ) {
@@ -31,11 +31,12 @@ export default function Navbar( { navArrayLinks } ) {
                                 navArrayLinks.map(item => (
                                 <Button key={item.title} 
                                         color="inherit"
-                                        component={NavLink}
+                                        component={Link}
                                         to={item.path}>
                                             {item.title}
                                 </Button>))
                             }
+                            
                             
 
                         </Box>

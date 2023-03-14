@@ -53,7 +53,7 @@ const Item = ( {item} ) => {
                                 >
                                 Agregar al Carrito
                         </Button>
-                        <Link to={`/detail/${item.id}`} className='btn btn-primary'>Ver más</Link>
+                        <Button component={Link} to={`/detail/${item.id}`} className='btn btn-primary'>Ver más</Button>
                     </Box>
                 </Paper>
 

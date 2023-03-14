@@ -14,28 +14,36 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 
 const navArrayLinks = [
   {
-      title: "inicio", 
-      path:"/"
+    title: "inicio",
+    path: "/"
   },
   {
-      title: "Nosotros", 
-      path:"/Nosotros"
+    title: "Mesas",
+    path: "/productos/mesa"
   },
   {
-      title: "Contacto", 
-      path:"/Contacto"
+    title: "Sillas",
+    path: "/productos/silla"
   },
   {
-      title: "Mesas", 
-      path:"/productos/mesa"
+    title: "Rinconero",
+    path: "/productos/rinconero"
   },
   {
-      title: <ShoppingCartIcon/>, 
-      path:"/carrito"
+    title: "Camas",
+    path: "/productos/cama"
   },
   {
-    title: <AccountCircle/>, 
-    path:"/ingresar"
+    title: "Placard", 
+    path:"/productos/placard"
+  },
+  {
+    title: <ShoppingCartIcon />,
+    path: "/carrito"
+  },
+  {
+    title: 'Log In',
+    path: "/ingresar"
   }
 ]
 
@@ -43,29 +51,29 @@ const navArrayLinks = [
 function App() {
 
   return (
-  
-      <BrowserRouter>
-      
-        <ThemeProvider theme={theme}>
-          
-          <NavBar navArrayLinks={ navArrayLinks }/>
-          <Toolbar/>
 
-          <Routes>
+    <BrowserRouter>
 
-            <Route path="/" element={<ItemListContainer/>}/>
-            <Route path="/productos/:categoryId" element={ <ItemListContainer/> }/>
-            <Route path="/detail/:itemId" element={ <ItemDetailContainer/> }/>
-            <Route path="/nosotros" element={<Nosotros/>}/>
-            <Route path="/contacto" element={<Contacto/>}/>
-            <Route path="*" element={ <Navigate/> }/>
+      <ThemeProvider theme={theme}>
 
-          </Routes>
+        <NavBar navArrayLinks={navArrayLinks} />
+        <Toolbar />
 
-        </ThemeProvider>
-      
-      </BrowserRouter>
-        
+        <Routes>
+
+          <Route path="/" element={<ItemListContainer />} />
+          <Route path="/productos/:categoryId" element={<ItemListContainer />} />
+          <Route path="/detail/:itemId" element={<ItemDetailContainer />} />
+          <Route path="/nosotros" element={<Nosotros />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="*" element={<Navigate />} />
+
+        </Routes>
+
+      </ThemeProvider>
+
+    </BrowserRouter>
+
   );
 }
 
