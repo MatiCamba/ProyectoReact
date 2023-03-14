@@ -1,0 +1,357 @@
+[
+    {
+        "id": 1,
+        "name": "Mesa 115 Pampa Redonda",
+        "marca": "LA VALENZIANA",
+        "description": "El diámetro total de la mesa es de 1.15 metros, y además de la particularidad del material del que está hecho, también destaca que tiene patas hechas de paraíso. En su totalidad es hecha de madera pero sus lustres varían.",
+        "price": 128.257,
+        "category": "mesa",
+        "img": "./assets/img/Mesa-115-Pampa-Redonda.png",
+        "stock": 3
+    },
+    {
+        "id": 2,
+        "name": "Mesa 120 Redonda Oslo",
+        "marca": "JCL",
+        "description": "Mesa 120 Redonda Oslo",
+        "price": 205.557,
+        "category": "mesa",
+        "img": "./assets/img/Mesa-120-Redonda-Oslo.png"
+        ,
+        "stock": 3
+    },
+    {
+        "id": 3,
+        "name": "Mesa 120×120-180 Emma Extensible",
+        "marca": "MEHRING",
+        "description": "Mesa 120×120-180 Emma Extensible",
+        "price": 572.668,
+        "category": "mesa",
+        "img": "./assets/img/Mesa115.jpg"
+        ,
+        "stock": 3
+    },
+    {
+        "id": 4,
+        "name": "Mesa 130×130 Fiona",
+        "marca": "JCL",
+        "description": "Mesa de madera guatambú Consultar lustre",
+        "price": 304.653,
+        "category": "mesa",
+        "img": "./assets/img/Mesa-130x130-Fiona.png"
+        ,
+        "stock": 3
+    },
+    {
+        "id": 5,
+        "name": "Mesa 140×140 Lourdes Colonial",
+        "marca":"MEHRING",
+        "description": "Mesa 140×140 Lourdes Colonial",
+        "price": 507.969,
+        "category": "mesa",
+        "img": "./assets/img/MaseLourdes.png"
+        ,
+        "stock": 3
+    },
+    {
+        "id": 6,
+        "name": "Mesa 140×140 Nuvola",
+        "marca":"RAYCES",
+        "description": "SILLA 332",
+        "price": 291.708,
+        "category": "mesa",
+        "img": "./assets/img/Mesanuvola.png"
+        ,
+        "stock": 3
+    },
+    {
+        "id": 7,
+        "name": "Silla 461",
+        "marca":"JCL",
+        "description": "Asiento y Respaldo Tapizado Chenille Primera Calidad.",
+        "price": 63.070,
+        "category": "silla",
+        "img": "./assets/img/SILLA-461.png",
+        "stock": 3    
+    },
+    {
+        "id": 8,
+        "name": "Silla 462",
+        "marca":"JCL",
+        "description": "Estructura y patas de madera de Paraíso con refuerzos metálicos",
+        "price": 71.065,
+        "category": "silla",
+        "img": "./assets/img/SILLA-462.png",
+        "stock": 3
+    },
+    {
+        "id": 9,
+        "name": "Silla Alba",
+        "marca":"RAYCES",
+        "description": "SILLA ALDANA",
+        "price": 84.433,
+        "category": "silla",
+        "img": "./assets/img/silla-Alba.jpg",
+        "stock": 3
+    },
+    {
+        "id": 10,
+        "name": "Silla Aldana",
+        "marca":"MEHRING",
+        "description": "ALBA SILLA",
+        "price": 51.128,
+        "category": "silla",
+        "img": "./assets/img/SILLA-Aldana.png",
+        "stock": 3
+    },
+    {
+        "id": 11,
+        "name": "Silla Barcelona",
+        "marca":"DECOTOTALE",
+        "description": "SILLA FLORENCIA",
+        "price": 32.015,
+        "category": "silla",
+        "img": "./assets/img/Silla-BARCELONA-1.jpg",
+        "stock": 3
+    },
+    {
+        "id": 12,
+        "name": "Silla Chat",
+        "marca":"JCL",
+        "description": "La línea de sillas y sillones Chat evoca un clásico estilo hoy relacionado a la tendencia vintange. ",
+        "price": 128.730,
+        "category": "silla",
+        "img": "./assets/img/Silla-Chat.png",
+        "stock": 3
+    },
+    {
+        "id": 13,
+        "name": "Rinconero Cama Lisboa",
+        "marca":"LA VALENZIANA",
+        "description": "El modelo Dubai, cuenta con cuatro módulos, los cuales podés combinar para armar el sofá que se adapte a las dimensiones de tu living.",
+        "price": 703.993,
+        "category": "rinconero",
+        "img": "https://via.placeholder.com/220",
+        "stock": 3
+    },
+    {
+        "id": 14,
+        "name": "Rinconero Dubai",
+        "marca":"FRONTERA LIVING",
+        "description": "MAdidas 2.87 x 2.28 alto : 0.88 ",
+        "price": 730.532,
+        "category": "rinconero",
+        "img": "./assets/img/rinconeroDubai.png",
+        "stock": 3
+    },
+    {
+        "id": 15,
+        "name": "Rinconero Gino",
+        "marca":"FRONTERA LIVING",
+        "description": "Rinconero base + Rinconero franja Módulo horizontal: 178 cm de ancho x 90 cm de profundidad Módulo vertical: 92 cm de ancho x 206 cm de profundidad ",
+        "price": 723.768,
+        "category": "rinconero",
+        "img": "./assets/img/Rinconerogino.png",
+        "stock": 3
+    },
+    {
+        "id": 16,
+        "name": "Rinconero Hong Kong",
+        "marca":"LA VALENZIANA",
+        "description": "Sofá cama esquinero. Totalmente desmontable y desenfundable, tanto la pana como el cuerotex o el Lino son aptos para lavadoras domésticas a no más de 30ºC.",
+        "price": 724.531,
+        "category": "rinconero",
+        "img": "./assets/img/rinconeroHK.png",
+        "stock": 3
+    },
+    {
+        "id": 17,
+        "name": "Rinconero Pacific",
+        "marca":"FRONTERA LIVING",
+        "description": "Módulo horizontal: 180 cm de ancho x 97 cm de profundidad Módulo vertical: 107 cm de ancho x 171 cm de profundidad Ancho total rinconcero: 286 cm Alto: 85 cm de respaldo x 42 cm",
+        "price": 953.309,
+        "category": "rinconero",
+        "img": "./assets/img/rinconeroPacific.png",
+        "stock": 3
+    },
+    {
+        "id": 18,
+        "name": "Rinconero Paris 2 cuerpos",
+        "marca":"LA VALENZIANA",
+        "description": "Sofá Paris 2 cuerpos con chaise longue Sillon tapizado en pana o ecocuero. Con apoya cabezas reclinable y asiento extensible.",
+        "price": 887.381,
+        "category": "rinconero",
+        "img": "./assets/img/rinconero-paris-ok-1.jpg",
+        "stock": 3
+    },
+    {
+        "id": 19,
+        "name": "Cama Multifunción Box 1.40×190",
+        "marca":"LA VALENZIANA",
+        "description": "Cama multifunción de 2 plazas. Tableros melaminados de 15mm. + parrilla elástico de pino. La cama se compone de 3 bloques: 2 muebles laterales con 3 cajones cada uno + un mueble frontal con dos zapateros.  ",
+        "price": 178.710,
+        "category": "cama",
+        "img": "./assets/img/cama-multifuncion.jpg",
+        "stock": 3
+    },
+    {
+        "id": 20,
+        "name": "Cama Premier 1,4",
+        "marca":"LA VALENZIANA",
+        "description": "Cama multifunción de 2 plazas para colchón de 1,4m. x 1,9m. Tableros melaminados de 15mm. + parrilla elástico de pino. La cama se compone de respaldo bajo + piecera baja de melamina + 2 cajones a cada lado con frente melamina y largueros anchos. ",
+        "price": 109.168,
+        "category": "cama",
+        "img": "./assets/img/cama-premiere-.png",
+        "stock": 3
+    },
+    {
+        "id": 21,
+        "name": "Cama Nido S20",
+        "marca":"LA VALENZIANA",
+        "description": "Cama nido para colchones de 0,80 x 1,90m. melamina textura barrique con apliques laqueados blancos. Incluye cajones bajo cama x 3 ",
+        "price": 127.543,
+        "category": "cama",
+        "img": "./assets/img/Nido-S20.png",
+        "stock": 3
+    },
+    {
+        "id": 22,
+        "name": "Cama Tren S45C",
+        "marca":"LA VALENZIANA",
+        "description": "Cama tren S45C para colchón de 1.90 x 0.90. Este modelo cuenta con estructura de melamina de 25mm. textura Venezia o Barrique, combinable con cualquiera de nuestros colores de laca. ",
+        "price": 314.727,
+        "category": "cama",
+        "img": "./assets/img/cama-tren-s45c.png",
+        "stock": 3
+    },
+    {
+        "id": 23,
+        "name": "Cucheta S21",
+        "marca":"LA VALENZIANA",
+        "description": "Cama cucheta para colchones de 0,80 x 1,90m. Melamina Barrique combinada con laca blanca. Incluye escalera con puertas y cajones inferiores.",
+        "price": 223.020,
+        "category": "cama",
+        "img": "./assets/img/Cucheta-S21-600x600.png",
+        "stock": 3
+    },
+    {
+        "id": 24,
+        "name": "Cama serie Linea 1 plaza",
+        "marca":"LA VALENZIANA",
+        "description": "CAMA DE UNA PLAZA PARA COLCHÓN DE 0,80 X 1,90M. • MELAMINA COLOR BARRIQUE CON PATAS LAQUEADAS BLANCAS.",
+        "price": 60.900,
+        "category": "cama",
+        "img": "./assets/img/SILLA-461.png",
+        "stock": 3
+    },
+    {
+        "id": 25,
+        "name": "Placard B572 203x230x56",
+        "marca":"DELOS",
+        "description": "2 Puertas Corredizas, 3 Cajones Interno con guías metálicas, Espejo Interno ",
+        "price": 347.665,
+        "category": "placard",
+        "img": "./assets/img/placard-b572.jpg",
+        "stock": 3
+    },
+    {
+        "id": 26,
+        "name": "Placard D 558 263X235X56",
+        "marca":"DELOS",
+        "description": "Linea POP, 3 puertas, Con espejos, 3 cajones con guías metálicas",
+        "price": 518.561, 
+        "category": "placard",
+        "img": "./assets/img/placard-D558.jpg",
+        "stock": 3
+    },
+    {
+        "id": 27,
+        "name": "Placard DJ102 Juvenil 120x200x58",
+        "marca":"DELOS",
+        "description": "2 Puertas Corredizas con riel de aluminio. 2 Cajones con guías metálicas. Zapatero con pistón a gas (para 8 pares). Manija de embutir. Barral y soportes metálicos.",
+        "price": 139.320, 
+        "category": "placard",
+        "img": "./assets/img/placard-DJ102.png",
+        "stock": 3
+    },
+    {
+        "id": 28,
+        "name": "Placard DL126 160x180x53",
+        "marca":"DELOS",
+        "description": "6 Puertas, 2 Cajones con guías metálicas y laterales melaminicos blancos, Interior revestido",
+        "price": 128.423, 
+        "category": "placard",
+        "img": "./assets/img/placard-DL126.png",
+        "stock": 3
+    },
+    {
+        "id": 29,
+        "name": "Placard DL353 180X205X52",
+        "marca":"DELOS",
+        "description": "Placard 6 puertas. 8 espejos. 2 cajones internos con guías metálicas. Interior revestido. Tiradores de aluminio con punta cromada.",
+        "price": 198.322, 
+        "category": "placard",
+        "img": "./assets/img/placard-DL353.png",
+        "stock": 3
+    },
+    {
+        "id": 30,
+        "name": "Placard DL462 133X218X58",
+        "marca":"DELOS",
+        "description": "Placard 2 puertas corredizas sobre rieles de aluminio. 4 espejos. 3 cajones internos con guías metálicas. Interior revestido. Tiradores perfil de aluminio.",
+        "price": 210.296, 
+        "category": "placard",
+        "img": "./assets/img/placard-DL462.png",
+        "stock": 3
+    },
+    {
+        "id": 31,
+        "name": "Conjunto Colchon y Sommier MCB115 140",
+        "marca":"SPRINGWALL",
+        "description": "Modelo: MCB 115 Medidas: 2 Plazas Tipo de Colchon : Resortes Bonell",
+        "price": 149.400, 
+        "category": "sommier",
+        "img": "./assets/img/ConjuntoMCB115.png",
+        "stock": 3
+    },
+    {
+        "id": 32,
+        "name": "Conjunto Colchon y Sommier One Plus 140",
+        "marca":"SPRINGWALL",
+        "description": "Modelo: One Plus Medidas: 2 Plazas Pillow: Si Tipo de Colchon : Espuma",
+        "price": 227.300, 
+        "category": "sommier",
+        "img": "./assets/img/ConjuntoOne-Plus-140.png",
+        "stock": 3
+    },
+    {
+        "id": 33,
+        "name": "Conjunto Colchón y Sommier SL 2001-140 x 190",
+        "marca":"SPRINGWALL",
+        "description": "Tejido de Soja-Bambú; todas las propiedades de la soja y el bambú combinadas en la tela. Estimulante natural del metabolismo, termorregulador, reduce el cansancio y el estrés. ",
+        "price": 523.687, 
+        "category": "sommier",
+        "img": "./assets/img/Conjunto-SL2001.png",
+        "stock": 3
+    },
+    {
+        "id": 34,
+        "name": "Sommier Roomy",
+        "marca":"SPRINGWALL",
+        "description": "Sistema hidraulico de apertura Firmeza estructural reforzada Tela jackard con laterales totalmente matelasseados",
+        "price": 387.942, 
+        "category": "sommier",
+        "img": "./assets/img/colchon-enrollable.jpg",
+        "stock": 3
+    },
+    {
+        "id": 36,
+        "name": "Colchon Primera 140x190x20",
+        "marca":"SPRINGWALL",
+        "description": "Tamaño 1 Plaza, Altura Colchón 20cms, Sensación Firme, Tipo de Colchón Espuma",
+        "price": 185.645, 
+        "category": "sommier",
+        "img": "./assets/img/Colchon-Primera.png",
+        "stock": 3
+    }
+]
