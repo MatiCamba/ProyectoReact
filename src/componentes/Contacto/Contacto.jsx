@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-export const Contacto = () => {
+const Contacto = () => {
     return (
         <div>
             
@@ -12,3 +12,5 @@ export const Contacto = () => {
         </div>
     )
 }
+
+export default Contacto

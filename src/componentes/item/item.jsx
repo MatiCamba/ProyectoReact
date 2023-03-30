@@ -3,24 +3,32 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../context/CartContext";
+import { useContext, useState } from "react";
 
 
 const Item = ( {item} ) => {
 
-    const Img = styled("img")({
-        width: 200,
-        height: "100%",
-        objectFit: "cover",
-        objectPosition:"center",
-        })
+    const { Img, agregarAlCarrito } = useContext(CartContext)
 
+    const [cantidad, setCantidad] = useState(1)
 
+    const handleAgregar = () => {
+        const newItem = {
+            ...item,
+            cantidad,
+        }
+
+        agregarAlCarrito(newItem)
+    }
+
+    
     return (
 
         
-            <Grid item xs={12} md={6} lg={4} >
+            <Grid item xs={12} md={4} lg={3}>
 
-                <Paper
+                <Paper elevation={3}
                 sx={{
                     display:"flex",
                     flexDirection: "column",
@@ -42,7 +50,7 @@ const Item = ( {item} ) => {
                     
                     
                     <Box sx={{ flexGrow: 1, display: "grid", gap: 2}}>
-                        <Typography variant="h4">{item.name}</Typography>
+                        <Typography variant="h6">{item.name}</Typography>
                         <Typography variant="body1">{item.marca}</Typography>
                             <Box sx={{m:"0 0 0 auto"}} component="p">
                                 Precio: <strong>${item.price}</strong>
@@ -50,10 +58,13 @@ const Item = ( {item} ) => {
 
                         <Button variant="contained" 
                                 startIcon={<AddShoppingCartIcon />}
-                                >
+                                onClick={handleAgregar}>
                                 Agregar al Carrito
                         </Button>
-                        <Button component={Link} to={`/detail/${item.id}`} className='btn btn-primary'>Ver más</Button>
+                        <Button component={Link} to={`/detail/${item.id}`} 
+                                className='btn btn-primary'>
+                                    Ver más
+                        </Button>
                     </Box>
                 </Paper>
 

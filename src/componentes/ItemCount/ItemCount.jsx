@@ -1,5 +1,6 @@
 import { Box, Button } from "@mui/material"
 
+
 const ItemCount = ( {max, cantidad, setCantidad, handleAgregar} ) => {
 
     const handleSumar = () => {
@@ -12,11 +13,32 @@ const ItemCount = ( {max, cantidad, setCantidad, handleAgregar} ) => {
 
     return (
         <Box sx={{m:'20px'}}>
-            <Button sx={{m:'5px', p:'5px', minWidth:'40px'}} onClick={handleRestar} variant="outlined">-</Button>
+            <Button 
+                sx={{m:'5px', p:'5px', minWidth:'40px'}} 
+                color={cantidad === 1 ? 'error' : 'primary'}
+                disabled={cantidad === 1}
+                onClick={handleRestar} 
+                variant="outlined">
+                    -
+            </Button>
+
             <span>{cantidad}</span>
-            <Button sx={{m:'5px', p:'5px', minWidth:'40px'}} onClick={handleSumar} variant="outlined">+</Button>
+
+            <Button 
+                sx={{m:'5px', p:'5px', minWidth:'40px'}}
+                color={cantidad === max ? 'error' : 'primary'}
+                disabled={cantidad === max}
+                onClick={handleSumar} 
+                variant="outlined">
+                    +
+            </Button>
             <br/>
-            <Button sx={{m:'5px'}} onClick={handleAgregar} variant="contained">Agregar al carrito</Button>
+            <Button 
+                sx={{m:'5px'}} 
+                onClick={handleAgregar} 
+                variant="contained">
+                    Agregar al carrito
+            </Button>
         </Box>
     )
 }

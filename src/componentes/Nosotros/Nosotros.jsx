@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-export const Nosotros = () => {
+const Nosotros = () => {
     return (
         <>
         
@@ -13,3 +13,5 @@ export const Nosotros = () => {
 
     )
 }
+
+export default Nosotros
