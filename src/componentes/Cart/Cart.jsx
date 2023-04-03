@@ -1,6 +1,6 @@
 
 
-import { Button, Typography } from '@mui/material'
+import { Button, Divider, Toolbar, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useContext } from 'react'
 import { CartContext } from '../../context/CartContext'
@@ -13,48 +13,60 @@ const Cart = () => {
 
     if (cart.length === 0) {
         return (
-            <div className="container my-5">
-                <h2>No tienes productos agregados</h2>
-                <hr/>
-                <Link to="/" className="btn btn-primary">Ir a comprar</Link>
-            </div>
+            <Box p='20px' display='flex' flexDirection='column' gap='20px'>
+                <Box display='flex' alignItems='center' justifyContent='center' >
+                    <img width='100%' src='./assets/img/carrito-vacio.gif' />
+                    <Typography variant="h4" fontWeight='600' color='white' position='absolute'/*  top='15%' left='25%'  */backgroundColor='transparent' zIndex='10'>Tu carrito esta Vacio</Typography>
+                </Box>
+                
+                <Button component={Link} sx={{ m:'0 auto' }} to="/" variant='contained'>Ir a comprar</Button>
+            </Box>
         )
     }
 
     return (
-        <div>
-            <h2>Tu carrito de compras</h2>
-            <hr/>
+        <Box>
+            
+            <Box>
+            <Typography sx={{ m:'20px 50px' }} variant="h4">Tu carrito de compras</Typography>
+            </Box>
+            
+            <Divider/>
 
             {
                 cart.map((prod) => (
-                    <Box key={prod.id}>
-                        <h4>{prod.name}</h4>
+                    <Box sx={{border:'2px solid #000', borderRadius:'30px', m:'10px', p:'7px'}} display='flex' alignItems='center' justifyContent='space-evenly' key={prod.id}>
                         <Img src={prod.img} alt={prod.name}/>
-                        <small>Precio unitario: ${prod.price} </small>
-                        <small>Cantidad: {prod.cantidad}</small>
-                        <p>Precio Total: ${prod.price * prod.cantidad}</p>
+                        <Box>
+                            <h4>{prod.name}</h4>
+                            {/* <small>Precio unitario: ${prod.price} </small> */}
+                            <small>Cantidad: {prod.cantidad}</small>
+                            <p>Precio Total: ${prod.price * prod.cantidad}</p>
+                        </Box>
+                            
                         <Button 
                             onClick={() => eliminarDelCarrito(prod.id) } 
-                            className="btn btn-danger"
+                            color='error'
                         >
                             <DeleteForeverIcon/>
                         </Button>
-                        <hr/>
+                        
                     </Box>
                 ))
             }
-
-            <h3>TOTAL: ${totalCompra()}</h3>
-            <Button onClick={vaciarCarrito} className="btn btn-danger">Vaciar carrito</Button>
-            <Button key={'Checkout'} 
-                    color="inherit"
+            <Box>
+                <Typography variant="h6" m='20px'>TOTAL: ${totalCompra()}</Typography>
+            </Box>
+            <Button sx={{m:'10px'}} onClick={vaciarCarrito} color='error' variant="outlined">Vaciar carrito</Button>
+            <Button key={'Checkout'}
+                    /* sx={{m:'10px'}} */
                     component={Link}
                     to='/Checkout' 
-                    className="btn btn-success">
+                    color='success' 
+                    variant="outlined">
                         Terminar mi Compra
             </Button>
-        </div>
+        </Box>
     )
 }
 

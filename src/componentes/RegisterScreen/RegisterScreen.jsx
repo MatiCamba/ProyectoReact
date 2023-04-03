@@ -1,5 +1,4 @@
-
-import { Button, Divider, ImageList, ImageListItem, Typography } from '@mui/material'
+import { Button, Divider, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useContext } from 'react'
 import IconButton from '@mui/material/IconButton';
@@ -14,14 +13,17 @@ import { useState } from 'react';
 import { LoginContext } from '../../context/LoginContext';
 import { Link } from 'react-router-dom';
 
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 
 
-const LoginScreen = () => {
 
-    const { login, googleLogin } = useContext(LoginContext)
+const RegisterScreen = () => {
 
-    const [ values, setValues ] = useState({
-        
+    const { register, googleLogin } = useContext(LoginContext)
+
+    const [values, setValues] = useState({
+        fullname: '',
         email: '',
         password: ''
     })
@@ -44,21 +46,30 @@ const LoginScreen = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        login(values)
+        register(values)
     }
 
     return (
         <Box display='flex'>
             <Box sx={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', m: '30px auto', zIndex: 2}}>
                 <Typography variant="h2">
-                    Login
+                    Registrate
                 </Typography>
                 <Divider />
                 <form>
 
                     <Box display='Flex' flexDirection='column' alignItems='center' mt='20px' border= '1px solid #f7f7f7d6' borderRadius='30px' p='20px' backgroundColor='#f7f7f7'>
-                        
-                        <TextField 
+                        <TextField
+                            sx={{ m: 1, width: '35ch' }}
+                            value={values.fullname}
+                            onChange={handleInputValues}
+                            required
+                            id="fullname"
+                            label="Nombre y Apellido"
+                            placeholder="Nombre y Apellido"
+                        />
+
+                        <TextField
                             sx={{ m: 1, width: '35ch' }}
                             value={values.email}
                             onChange={handleInputValues}
@@ -68,16 +79,16 @@ const LoginScreen = () => {
                             placeholder="Ingresa tu Email"
                         />
 
-                        <FormControl 
-                            sx={{ m: 1, width: '35ch' }} 
+                        <FormControl
+                            sx={{ m: 1, width: '35ch' }}
                             variant="outlined"
-                            >                                
-                            <InputLabel 
+                        >
+                            <InputLabel
                                 htmlFor="outlined-adornment-password"
-                                >
-                                    Password
+                            >
+                                Password
                             </InputLabel>
-                                <OutlinedInput
+                            <OutlinedInput
                                 value={values.password}
                                 onChange={handleInputValues}
                                 id="password"
@@ -98,19 +109,19 @@ const LoginScreen = () => {
                             />
                         </FormControl>
 
-                        <Button onClick={handleSubmit} sx={{ maxWidth: '100px', m: '15px' }} variant='outlined'>Ingresar</Button>
+                        <Button onClick={handleSubmit} sx={{ maxWidth: '150px', m: '15px' }} variant='outlined'>Crear Usuario</Button>
 
-                        <Button key={'Register'} 
-                                        color="inherit"
-                                        component={Link}
-                                        to='/register'>
-                                    Registrate                            
+                        <Button key={'login'}
+                            color="inherit"
+                            variant='outlined'
+                            component={Link}
+                            to='/login'>
+                            Ya estoy Registrado
                         </Button>
-                        
 
                     </Box>
-                </form>
 
+                </form>
                 <Button onClick={googleLogin}
                     sx={{ maxWidth: '180px', m: '15px auto' }}
                     color="inherit"
@@ -118,7 +129,6 @@ const LoginScreen = () => {
                     <img src="./assets/img/google.png" alt='Google' />
                     Ingresar con Google
                 </Button>
-
             </Box>
             <Box sx={{position:'fixed'}}>
 
@@ -183,4 +193,4 @@ const itemData = [
     },
 ];
 
-export default LoginScreen
+export default RegisterScreen

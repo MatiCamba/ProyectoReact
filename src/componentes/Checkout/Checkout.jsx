@@ -1,11 +1,34 @@
 
-import { Box, Button, Divider, TextField, Typography } from '@mui/material'
-import { collection, addDoc, updateDoc, getDoc, doc } from 'firebase/firestore'
+import { Alert, Box, Button, Divider, TextField, Typography } from '@mui/material'
+import { collection, addDoc, writeBatch, getDocs, query, where, documentId } from 'firebase/firestore'
 import React, { useContext, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { CartContext } from '../../context/CartContext'
 import { LoginContext } from '../../context/LoginContext'
 import { db } from '../../firebase/config'
+import { Formik } from 'formik'
+import * as Yup from 'yup';
+
+const schema = Yup.object().shape({
+    nombre: Yup.string()
+        .min(3, 'Minimo 3 Caracteres')
+        .max(20, 'Demasiado largo')
+        .required('Este campo es Obligatorio'),
+    apellido: Yup.string()
+        .min(3, 'Minimo 3 Caracteres')
+        .max(20, 'Demasiado largo')
+        .required('Este campo es Obligatorio'),
+    direccion: Yup.string()
+        .min(6, 'Minimo 3 Caracteres')
+        .max(20, 'Demasiado largo')
+        .required('Este campo es Obligatorio'),
+    telefono: Yup.number()
+        .min(10, 'Minimo 10 Caracteres')
+        .max(12, 'Demasiado largo')
+        .required('Este campo es Obligatorio'),
+    email: Yup.string().email('Email Invalido').required('Este campo es Obligatorio'),
+});
+
 
 
 
@@ -13,89 +36,85 @@ const Checkout = () => {
 
     const { cart, totalCompra, vaciarCarrito } = useContext(CartContext)
 
-    const [orderId, setOrderId] =useState(null)
+    const [orderId, setOrderId] = useState(null)
 
-    const { user, tryLogin } = useContext(LoginContext)
-
-    const [values, setValues] = useState({
-        nombre: '',
-        apellido:'',
-        direccion: '',
-        telefono: '',
-        email: ''
-
-    })
-
-    const handleInputValues = (e) => {
-
-        setValues({
-            ...values,
-            [e.target.id]: e.target.value
+    /*     const [values, setValues] = useState({
+            nombre: '',
+            apellido:'',
+            direccion: '',
+            telefono: '',
+            email: ''
+    
         })
-    }
+    
+        const handleInputValues = (e) => {
+    
+            setValues({
+                ...values,
+                [e.target.id]: e.target.value
+            })
+        } */
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
 
-        if(values.nombre.length < 3) {
-            alert('nombre invalido')
-            return
-        }
-        if(values.direccion.length < 3) {
-            alert('nombre invalido')
-            return
-        }
-        if(values.telefono.length < 3) {
-            alert('nombre invalido')
-            return
-        }
-        
+
+    const generarOrden = async (values) => {
+
         const order = {
             cliente: values,
-            items: cart.map((prod) => ({id: prod.id, name: prod.name, price: prod.price, cantidad: prod.cantidad })),
+            items: cart.map((prod) => ({ id: prod.id, name: prod.name, price: prod.price, cantidad: prod.cantidad })),
             total: totalCompra(),
             fecha: new Date()
         }
 
-        console.log('submit', order);
-
-        const productosRef = collection(db, 'productos')
-            /* console.log(productosRef); */
-        cart.forEach((item) => {
-            const docRef = doc(productosRef, item.id)
-                
-            getDoc(docRef)
-                .then((doc) => {
-                    if(doc.data().stock >= item.cantida){
-                        updateDoc(docRef, {
-                            stock: doc.data().stock - item.cantidad
-                        })
-                    }else { alert('no hay Stock' + item.name) }
-                    console.log(docRef);
-                })
-        })
+        const batch = writeBatch(db)
 
         const ordersRef = collection(db, 'orders')
+        const productosRef = collection(db, 'productos')
 
-        addDoc(ordersRef, order)
-            .then((doc) => {
-                setOrderId(doc.id)
-                vaciarCarrito()
-            })
+        const outOfStock = []
+
+        const itemRef = query(productosRef, where(documentId(), 'in', cart.map(prod => prod.id)))
+
+        const response = await getDocs(itemRef)
+
+        response.docs.forEach((doc) => {
+            const item = cart.find(prod => prod.id === doc.id)
+
+            if (doc.data().stock >= item.cantidad) {
+                batch.update(doc.ref, {
+                    stock: doc.data().stock - item.cantidad
+                })
+            } else {
+                outOfStock.push(item)
+            }
+        })
+
+        if (outOfStock.length === 0) {
+            await batch.commit()
+
+            addDoc(ordersRef, order)
+                .then((doc) => {
+                    setOrderId(doc.id)
+                    vaciarCarrito()
+                })
+        } else {
+            alert(`El productos ${outOfStock[0].name} no tiene stock`);
+        }
+
     }
 
-    if ( orderId ) {
+    if (orderId) {
         return (
             <Box>
-                <Typography variant='h4'm={2} >Tu orden se Registro con Exito</Typography>
-                <Divider/>
+                <Typography variant='h4' m={2} >Tu orden se Registro con Exito</Typography>
+                <Divider />
                 <Typography variant='body1' m={2}>Guarda tu numero de Orden: {orderId}</Typography>
             </Box>
         )
     }
 
-    if ( cart.length === 0) {
-        return <Navigate to="/"/>
+    if (cart.length === 0) {
+        return <Navigate to="/" />
     }
 
     return (
@@ -103,61 +122,76 @@ const Checkout = () => {
             <h2>Checkout</h2>
             <hr />
 
-            <Box display='Flex' flexDirection='column' alignItems='center' mt='20px'>
-                <TextField
-                    sx={{ m: 1, width: '25ch' }}
-                    value={values.nombre}
-                    onChange={handleInputValues}
-                    required
-                    id="nombre"
-                    label="Nombre"
-                    placeholder="Ingresa tu Nombre"
-                />
+            <Formik
+                initialValues={{
+                    nombre: '',
+                    apellido: '',
+                    direccion: '',
+                    email: '',
+                    telefono: ''
+                }}
+                validationSchema={schema}
+                onSubmit={generarOrden}>
 
-                <TextField
-                    sx={{ m: 1, width: '25ch' }}
-                    value={values.apellido}
-                    onChange={handleInputValues}
-                    required
-                    id="apellido"
-                    label="Apellido"
-                    placeholder="Ingresa tu Apellido"
-                />
+                {({ values, handleChange, handleSubmit, isSubmitting, errors }) => (
 
-                <TextField
-                    sx={{ m: 1, width: '25ch' }}
-                    value={values.direccion}
-                    onChange={handleInputValues}
-                    required
-                    id="direccion"
-                    label="Direccion"
-                    placeholder="Ingresa tu Direccion"
-                />
+                    <Box display='Flex' flexDirection='column' alignItems='center' mt='20px'>
+                        <TextField
+                            sx={{ m: 1, width: '25ch' }}
+                            value={values.nombre}
+                            onChange={handleChange}
+                            required
+                            id="nombre"
+                            label="Nombre"
+                            placeholder="Ingresa tu Nombre"
+                        />{errors.nombre && <Alert severity="error">{errors.nombre}</Alert>}
+                        <TextField
+                            sx={{ m: 1, width: '25ch' }}
+                            value={values.apellido}
+                            onChange={handleChange}
+                            required
+                            id="apellido"
+                            label="Apellido"
+                            placeholder="Ingresa tu Apellido"
+                        />
+                        {errors.apellido && <Alert severity="error">{errors.apellido}</Alert>}  
+                        <TextField
+                            sx={{ m: 1, width: '25ch' }}
+                            value={values.direccion}
+                            onChange={handleChange}
+                            required
+                            id="direccion"
+                            label="Direccion"
+                            placeholder="Ingresa tu Direccion"
+                        />
+                        {errors.direccion && <Alert severity="error">{errors.direccion}</Alert>}
+                        <TextField
+                            sx={{ m: 1, width: '25ch' }}
+                            value={values.email}
+                            onChange={handleChange}
+                            required
+                            id="email"
+                            label="Email"
+                            placeholder="Ingresa tu Email"
+                        />
+                        {errors.email && <Alert severity="error">{errors.email}</Alert>}
+                        <TextField
+                            sx={{ m: 1, width: '25ch' }}
+                            value={values.telefono}
+                            onChange={handleChange}
+                            required
+                            id="telefono"
+                            label="telefono"
+                            placeholder="Ingresa tu Telefono"
+                        />
+                        {errors.telefono && <Alert severity="error">{errors.telefono}</Alert>}
 
-                <TextField
-                    sx={{ m: 1, width: '25ch' }}
-                    value={values.email}
-                    onChange={handleInputValues}
-                    required
-                    id="email"
-                    label="Email"
-                    placeholder="Ingresa tu Email"
-                />
+                        <Button onClick={handleSubmit} disabled={isSubmitting} sx={{ maxWidth: '100px', m: '15px' }} variant='outlined'>Siguiente</Button>
 
-                <TextField
-                    sx={{ m: 1, width: '25ch' }}
-                    value={values.telefono}
-                    onChange={handleInputValues}
-                    required
-                    id="telefono"
-                    label="telefono"
-                    placeholder="Ingresa tu Telefono"
-                />
+                    </Box>
+                )}
+            </Formik>
 
-
-                <Button onClick={handleSubmit} sx={{ maxWidth: '100px', m: '15px' }} variant='outlined'>Siguiente</Button>
-
-            </Box>
         </div>
     )
 }

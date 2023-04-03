@@ -51,7 +51,7 @@ export default function Navbar( { navArrayLinks } ) {
                                         to='/Cart'>
                                     <CartWidget/>                            
                                 </Button>
-
+                                
                                 <IconButton key={'Avatar'} 
                                         color="inherit"
                                         component={Link}
@@ -60,7 +60,7 @@ export default function Navbar( { navArrayLinks } ) {
                                     <Typography>Hola, Matias</Typography>                         
                                 </IconButton>
 
-                                <Button color='warning' onClick={logout}>Log Out</Button>
+                                <Button color='secondary' onClick={logout}>Log Out</Button>
                         
                         </Box>
                     
@@ -71,7 +71,7 @@ export default function Navbar( { navArrayLinks } ) {
                     anchor="left" 
                     onClose={() => setOpen(false)}
                     sx={{display: { xs:"flex", sm:"none" }}}>
-            <NavListDrawer navArrayLinks={navArrayLinks} setOpen={setOpen}/>
+            <NavListDrawer navArrayLinks={navArrayLinks} setOpen={setOpen} logout={logout}/>
             </Drawer>
 
         </>

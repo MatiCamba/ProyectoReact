@@ -42,7 +42,7 @@ export const CartProvider = ({ children }) => {
 
 
     const Img = styled("img")({
-        width: 'min(100vw, 250px)',
+        width: 'min(50vw, 250px)',
         maxHeight: 200,
         objectFit: "cover",
         objectPosition:"center",

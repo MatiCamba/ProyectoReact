@@ -1,6 +1,6 @@
 import LoginScreen from "../componentes/LoginScreen/LoginScreen";
 import { Routes, Route, Navigate } from 'react-router-dom'
-import RegisterScreen from "../RegisterScreen/RegisterScreen";
+import RegisterScreen from "../componentes/RegisterScreen/RegisterScreen";
 
 const PublicRoutes = () => {
 

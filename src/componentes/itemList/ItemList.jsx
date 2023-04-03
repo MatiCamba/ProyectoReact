@@ -9,7 +9,7 @@ const ItemList = ( {items} ) => {
     
     return (
         <Container>
-            <h2>Productos</h2>
+            <h2>{items.category}</h2>
             <hr/>
             
             <Grid container spacing={2}>

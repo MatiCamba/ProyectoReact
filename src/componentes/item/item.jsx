@@ -1,7 +1,6 @@
 import { Box, Button, Grid, IconButton, Paper, Typography } from "@mui/material"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import { useContext, useState } from "react";

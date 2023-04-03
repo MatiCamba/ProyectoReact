@@ -6,10 +6,6 @@ import { styled } from "@mui/system";
 import { CartContext } from "../../context/CartContext";
 
 
-
-
-
-
 const ItemDetail = ({ item }) => {
 
     const { agregarAlCarrito, isInCart } = useContext(CartContext)
@@ -35,11 +31,12 @@ const ItemDetail = ({ item }) => {
     }
 
     const Img = styled("img")({
-        width: 300,
+        width: 'min(80vw, 500px)',
         height: "100%",
         objectFit: "cover",
         objectPosition: "center",
-        margin: '0 auto'
+        margin: '0 auto',
+        marginTop:'4.5rem'
     })
 
     const handleChange = (event, newValue) => {
