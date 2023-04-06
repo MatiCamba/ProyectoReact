@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material"
+import { Box, Button} from "@mui/material"
 
 
 const ItemCount = ( {max, cantidad, setCantidad, handleAgregar} ) => {
@@ -12,7 +12,7 @@ const ItemCount = ( {max, cantidad, setCantidad, handleAgregar} ) => {
     }
 
     return (
-        <Box sx={{m:'20px'}}>
+        <Box sx={{m:'20px auto'}}>
             <Button 
                 sx={{m:'5px', p:'5px', minWidth:'40px'}} 
                 color={cantidad === 1 ? 'error' : 'primary'}
@@ -34,7 +34,7 @@ const ItemCount = ( {max, cantidad, setCantidad, handleAgregar} ) => {
             </Button>
             <br/>
             <Button 
-                sx={{m:'5px'}} 
+                sx={{m:'0 auto'}} 
                 onClick={handleAgregar} 
                 variant="contained">
                     Agregar al carrito
