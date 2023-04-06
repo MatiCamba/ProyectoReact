@@ -25,7 +25,7 @@ const Cart = () => {
     }
 
     return (
-        <Box>
+        <Box maxWidth='60%' m='0 auto'>
             
             <Box>
             <Typography sx={{ m:'20px 50px' }} variant="h4">Tu carrito de compras</Typography>

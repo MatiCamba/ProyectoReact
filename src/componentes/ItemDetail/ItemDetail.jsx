@@ -1,6 +1,7 @@
-import { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link, useNavigate, } from "react-router-dom"
-import { Box, Button, Grid, Tab, Tabs, Typography } from "@mui/material"
+import { Box, Button, Grid, Snackbar, Tab, Tabs, Typography } from "@mui/material"
+import MuiAlert from '@mui/material/Alert';
 import ItemCount from "../ItemCount/ItemCount";
 import { styled } from "@mui/system";
 import { CartContext } from "../../context/CartContext";
@@ -9,9 +10,14 @@ import { collection, getDocs, query, where } from 'firebase/firestore'
 import Item from '../item/item'
 import { useParams } from "react-router-dom";
 
-
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const ItemDetail = ({ item }) => {
+
+    const [open, setOpen] = React.useState(false);
+    
 
     const { agregarAlCarrito, isInCart } = useContext(CartContext)
 
@@ -19,35 +25,35 @@ const ItemDetail = ({ item }) => {
 
 
     const [productos, setProductos] = useState([])
-    
+
     const [value, setValue] = useState("description");
 
     const navigate = useNavigate()
 
     const { categoryId } = useParams()
-    
+
     useEffect(() => {
 
         setTimeout(() => {
             /* setLoading(true) */
-            
-            const productosRef = collection( db, "productos" )
+
+            const productosRef = collection(db, "productos")
             const q = categoryId
-                    ? query(productosRef, where("category", "===", categoryId)/* limit(X) */)// para limitar los elementos que renderizo
-                    : productosRef
-            
+                ? query(productosRef, where("category", "===", categoryId)/* limit(X) */)// para limitar los elementos que renderizo
+                : productosRef
+
             getDocs(q)
                 .then((res) => {
                     const docs = res.docs.map((doc) => {
-                        return {...doc.data(), category: doc.category}
+                        return { ...doc.data(), category: doc.category }
                     })
                     console.log(docs);
                     setProductos(docs)
                 })
-                /* .finally(() => {
-                    setLoading(false)
-                }) */
-            
+            /* .finally(() => {
+                setLoading(false)
+            }) */
+
         }, 1600);
 
     }, [categoryId])
@@ -61,9 +67,18 @@ const ItemDetail = ({ item }) => {
             ...item,
             cantidad,
         }
-
+        
+        setOpen(true)
         agregarAlCarrito(newItem)
     }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+    
+        setOpen(false);
+    };
 
     const Img = styled("img")({
         width: 'min(80vw, 500px)',
@@ -71,7 +86,7 @@ const ItemDetail = ({ item }) => {
         objectFit: "cover",
         objectPosition: "center",
         margin: '0 auto',
-        marginTop:'4.5rem'
+        marginTop: '4.5rem'
     })
 
     const handleChange = (event, newValue) => {
@@ -83,7 +98,7 @@ const ItemDetail = ({ item }) => {
             <div>Sin Stock</div>
         )
     } */
-    
+
 
 
     return (
@@ -97,26 +112,26 @@ const ItemDetail = ({ item }) => {
                     </Box>
                 </Grid>
 
-                <Grid item xs={12} md={4} sx={{my:'50px'}}>
-                    <Typography sx={{my:'20px'}} variant="h4">{item.name}</Typography>
-                    <Typography sx={{my:'20px'}} variant="body1">{item.marca}</Typography>
+                <Grid item xs={12} md={4} sx={{ my: '50px' }}>
+                    <Typography sx={{ my: '20px' }} variant="h4">{item.name}</Typography>
+                    <Typography sx={{ my: '20px' }} variant="body1">{item.marca}</Typography>
                     <Box sx={{ m: "0 0 0 auto" }}>
                         Precio: <strong>${item.price}</strong>
                         {item.stock === 0
                             ? <Box m='20px'><Typography variant='body1'>Sin Stock Disponible</Typography></Box>
                             : item.stock <= 5 &&
-                                <p><strong>
-                                    {
-                                        item.stock === 1
-                                            ? `Ultimo Disponible`
-                                            : `Quedan solo ${item.stock} unidades!`
-                                    }
-                                </strong></p>
-                            }
-                            
+                            <p><strong>
+                                {
+                                    item.stock === 1
+                                        ? `Ultimo Disponible`
+                                        : `Quedan solo ${item.stock} unidades!`
+                                }
+                            </strong></p>
+                        }
+
                     </Box>
-                    {}
-                    { item.stock === 0
+                    { }
+                    {item.stock === 0
                         ? <></>
                         : isInCart(item.id)
                             ? <Button
@@ -133,10 +148,15 @@ const ItemDetail = ({ item }) => {
                                 handleAgregar={handleAgregar}
                             />
                     }
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                            Se agrego {item.name} al carrito!
+                        </Alert>
+                    </Snackbar>
                 </Grid>
 
 
-                
+
                 {/* INFORMATION */}
                 <Box m="20px 0">
                     <Tabs value={value} onChange={handleChange}>

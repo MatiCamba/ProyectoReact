@@ -8,6 +8,7 @@ import { LoginContext } from '../../context/LoginContext'
 import { db } from '../../firebase/config'
 import { Formik } from 'formik'
 import * as Yup from 'yup';
+import { ListaDeCompra } from './ListaDeCompra'
 
 const schema = Yup.object().shape({
     nombre: Yup.string()
@@ -24,7 +25,7 @@ const schema = Yup.object().shape({
         .required('Este campo es Obligatorio'),
     telefono: Yup.number()
         .min(10, 'Minimo 10 Caracteres')
-        .max(12, 'Demasiado largo')
+
         .required('Este campo es Obligatorio'),
     email: Yup.string().email('Email Invalido').required('Este campo es Obligatorio'),
 });
@@ -105,10 +106,13 @@ const Checkout = () => {
 
     if (orderId) {
         return (
-            <Box>
-                <Typography variant='h4' m={2} >Tu orden se Registro con Exito</Typography>
+            <Box display='flex' flexDirection='column' alignItems='center' m='20px auto'>
+                <Typography variant='h3'>Tu orden se Registro con Exito</Typography>
                 <Divider />
-                <Typography variant='body1' m={2}>Guarda tu numero de Orden: {orderId}</Typography>
+                <Typography sx={{ border: '2px solid #000', borderRadius: '30px', m: '10px', p: '15px' }} variant='body1'>Guarda tu numero de Orden: <strong>{orderId}</strong></Typography>
+                <Divider />
+                <img src='../assets/img/pedido-en-camino.gif' alt='Estamos preprando tu compra'/>
+
             </Box>
         )
     }
@@ -118,81 +122,90 @@ const Checkout = () => {
     }
 
     return (
-        <div>
-            <h2>Checkout</h2>
-            <hr />
+        <Box>
+            <Box display='flex' justifyContent='center' m='10px auto'>
+                <Typography variant="h2" >Checkout</Typography>
+            </Box>
+            <Divider/>
+            <Box sx={{ display: 'flex', justifyContent:'space-evenly' }}>
+                <Box>
+                    <Formik
+                        initialValues={{
+                            nombre: '',
+                            apellido: '',
+                            direccion: '',
+                            email: '',
+                            telefono: ''
+                        }}
+                        validationSchema={schema}
+                        onSubmit={generarOrden}>
 
-            <Formik
-                initialValues={{
-                    nombre: '',
-                    apellido: '',
-                    direccion: '',
-                    email: '',
-                    telefono: ''
-                }}
-                validationSchema={schema}
-                onSubmit={generarOrden}>
+                        {({ values, handleChange, handleSubmit, isSubmitting, errors }) => (
 
-                {({ values, handleChange, handleSubmit, isSubmitting, errors }) => (
+                            <Box display='Flex' flexDirection='column' alignItems='center' mt='20px'>
+                                <TextField
+                                    sx={{ m: 1, width: '25ch' }}
+                                    value={values.nombre}
+                                    onChange={handleChange}
+                                    required
+                                    id="nombre"
+                                    label="Nombre"
+                                    placeholder="Ingresa tu Nombre"
+                                />{errors.nombre && <Alert severity="error">{errors.nombre}</Alert>}
+                                <TextField
+                                    sx={{ m: 1, width: '25ch' }}
+                                    value={values.apellido}
+                                    onChange={handleChange}
+                                    required
+                                    id="apellido"
+                                    label="Apellido"
+                                    placeholder="Ingresa tu Apellido"
+                                />
+                                {errors.apellido && <Alert severity="error">{errors.apellido}</Alert>}
+                                <TextField
+                                    sx={{ m: 1, width: '25ch' }}
+                                    value={values.direccion}
+                                    onChange={handleChange}
+                                    required
+                                    id="direccion"
+                                    label="Direccion"
+                                    placeholder="Ingresa tu Direccion"
+                                />
+                                {errors.direccion && <Alert severity="error">{errors.direccion}</Alert>}
+                                <TextField
+                                    sx={{ m: 1, width: '25ch' }}
+                                    value={values.email}
+                                    onChange={handleChange}
+                                    required
+                                    id="email"
+                                    label="Email"
+                                    placeholder="Ingresa tu Email"
+                                />
+                                {errors.email && <Alert severity="error">{errors.email}</Alert>}
+                                <TextField
+                                    sx={{ m: 1, width: '25ch' }}
+                                    value={values.telefono}
+                                    onChange={handleChange}
+                                    required
+                                    id="telefono"
+                                    label="telefono"
+                                    placeholder="Ingresa tu Telefono"
+                                />
+                                {errors.telefono && <Alert severity="error">{errors.telefono}</Alert>}
 
-                    <Box display='Flex' flexDirection='column' alignItems='center' mt='20px'>
-                        <TextField
-                            sx={{ m: 1, width: '25ch' }}
-                            value={values.nombre}
-                            onChange={handleChange}
-                            required
-                            id="nombre"
-                            label="Nombre"
-                            placeholder="Ingresa tu Nombre"
-                        />{errors.nombre && <Alert severity="error">{errors.nombre}</Alert>}
-                        <TextField
-                            sx={{ m: 1, width: '25ch' }}
-                            value={values.apellido}
-                            onChange={handleChange}
-                            required
-                            id="apellido"
-                            label="Apellido"
-                            placeholder="Ingresa tu Apellido"
-                        />
-                        {errors.apellido && <Alert severity="error">{errors.apellido}</Alert>}  
-                        <TextField
-                            sx={{ m: 1, width: '25ch' }}
-                            value={values.direccion}
-                            onChange={handleChange}
-                            required
-                            id="direccion"
-                            label="Direccion"
-                            placeholder="Ingresa tu Direccion"
-                        />
-                        {errors.direccion && <Alert severity="error">{errors.direccion}</Alert>}
-                        <TextField
-                            sx={{ m: 1, width: '25ch' }}
-                            value={values.email}
-                            onChange={handleChange}
-                            required
-                            id="email"
-                            label="Email"
-                            placeholder="Ingresa tu Email"
-                        />
-                        {errors.email && <Alert severity="error">{errors.email}</Alert>}
-                        <TextField
-                            sx={{ m: 1, width: '25ch' }}
-                            value={values.telefono}
-                            onChange={handleChange}
-                            required
-                            id="telefono"
-                            label="telefono"
-                            placeholder="Ingresa tu Telefono"
-                        />
-                        {errors.telefono && <Alert severity="error">{errors.telefono}</Alert>}
+                                <Button onClick={handleSubmit} disabled={isSubmitting} sx={{ maxWidth: '100px', m: '15px' }} variant='outlined'>Siguiente</Button>
 
-                        <Button onClick={handleSubmit} disabled={isSubmitting} sx={{ maxWidth: '100px', m: '15px' }} variant='outlined'>Siguiente</Button>
+                            </Box>
+                        )}
+                    </Formik>
+                </Box>
+                <Box>
+                    <ListaDeCompra />
+                </Box>
+            </Box>
 
-                    </Box>
-                )}
-            </Formik>
 
-        </div>
+        </Box>
     )
 }
 
