@@ -1,6 +1,6 @@
 
 
-import { Button, Divider, Toolbar, Typography } from '@mui/material'
+import { Button, Divider, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useContext } from 'react'
 import { CartContext } from '../../context/CartContext'
@@ -25,7 +25,7 @@ const Cart = () => {
     }
 
     return (
-        <Box maxWidth='60%' m='0 auto'>
+        <Box maxWidth='80%' m='0 auto'>
             
             <Box>
             <Typography sx={{ m:'20px 50px' }} variant="h4">Tu carrito de compras</Typography>

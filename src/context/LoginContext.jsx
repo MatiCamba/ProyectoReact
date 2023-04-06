@@ -23,26 +23,14 @@ export const LoginProvider = ( { children } ) => {
             })
     }
 
-    const login = ( values ) => {
+    const login = (values) => {
         signInWithEmailAndPassword(auth, values.email, values.password)
-            .then((userCredential) => {
-                /* console.log(userCredential); */
-                setUser({
-                    email: userCredential.user.email,
-                    logged: true
-                })
-            })
+            .catch((err) => console.log(err))
     }
 
-    const register = ( values ) => {
+    const register = (values) => {
         createUserWithEmailAndPassword(auth, values.email, values.password)
-            .then((userCredential) => {
-                /* console.log(userCredential); */
-                setUser({
-                    email: userCredential.user.email,
-                    logged: true
-                })
-            })
+            .catch((err) => console.log(err.message))
     }
 
     const logout = () => {

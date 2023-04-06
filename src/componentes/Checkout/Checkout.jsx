@@ -127,7 +127,7 @@ const Checkout = () => {
                 <Typography variant="h2" >Checkout</Typography>
             </Box>
             <Divider/>
-            <Box sx={{ display: 'flex', justifyContent:'space-evenly' }}>
+            <Box sx={{ display: { xs:"block", sm:"flex" }, justifyContent:'space-evenly' }}>
                 <Box>
                     <Formik
                         initialValues={{
